@@ -1,18 +1,24 @@
 package proj4;
 
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class TriageSimulator {
     private final PriorityQueue<Patient> priorityQueue = new PriorityQueue<>();
-    private final Queue<Patient> firstQueue;
-    private final Queue<Patient> secondQueue;
-    private final Queue<Patient> thirdQueue;
+    private Queue<Patient> firstQueue = new LinkedList<>();
+    private Queue<Patient> secondQueue = new LinkedList<>();
+    private Queue<Patient> thirdQueue =  new LinkedList<>();
+    private int arrivalOrder;
 
     public TriageSimulator(Queue<Patient> firstQueue, Queue<Patient> secondQueue, Queue<Patient> thirdQueue) {
         this.firstQueue = firstQueue;
         this.secondQueue = secondQueue;
         this.thirdQueue = thirdQueue;
+    }
+
+    public TriageSimulator(){
+
     }
 
     public void addRegularQueue(Patient patient){
@@ -34,13 +40,38 @@ public class TriageSimulator {
             thirdQueue.offer(patient);
             patient.setPriority(3);
         }
+        patient.setArrivalOrder(arrivalOrder++);
     }
 
-    public void addPriorityQueue(Patient patient) {
-        priorityQueue.add(patient);
+    public void addPriorityQueue() {
+        while (!firstQueue.isEmpty()){
+            priorityQueue.add(firstQueue.poll());
+        }
+        while (!secondQueue.isEmpty()){
+            priorityQueue.add(secondQueue.poll());
+        }
+        while (!thirdQueue.isEmpty()){
+            priorityQueue.add(thirdQueue.poll());
+        }
+    }
+
+    public Boolean isEmpty(){
+        // if all queues are empty return true
+        return (firstQueue.isEmpty() && secondQueue.isEmpty() && thirdQueue.isEmpty());
+    }
+
+    public void add(String lineFromFile){
+        String[] parts = lineFromFile.split(" ");
+        String firstName = parts[0];
+        String lastName = parts[1];
+        String code = parts[2];
+
+        Patient patient = new Patient(firstName, lastName, code);
+        addRegularQueue(patient);
     }
 
     public String remove(){
-        priorityQueue.remove(patient);
+        return " ";
     }
+
 }

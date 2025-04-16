@@ -5,6 +5,7 @@ public class Patient implements Comparable<Patient> {
     private final String lastName;
     private String triageCode;
     private int priority;
+    private int arrivalOrder;
 
     public Patient(String firstName, String lastName, String triageCode) {
         this.firstName = firstName;
@@ -28,6 +29,14 @@ public class Patient implements Comparable<Patient> {
         this.priority = priority;
     }
 
+    public int getArrivalOrder() {
+        return arrivalOrder;
+    }
+
+    public void setArrivalOrder(int arrivalOrder) {
+        this.arrivalOrder = arrivalOrder;
+    }
+
     @Override
     public String toString(){
         return firstName + " " + lastName + " " + triageCode;
@@ -35,7 +44,13 @@ public class Patient implements Comparable<Patient> {
 
     @Override
     public int compareTo(Patient other) {
-        //compare patient priorities to sort them based on the lower value
-        return Integer.compare(this.priority, other.priority);
+        // if priorities are not the same
+        if (this.priority != other.priority){
+            // compare patient priorities to sort them based on the lower value
+            return Integer.compare(this.priority, other.priority);
+        } else {
+            // if priorities are the same, sort them based on arrival order
+            return Integer.compare(this.arrivalOrder, other.arrivalOrder);
+        }
     }
 }
