@@ -11,9 +11,16 @@ public class Main {
             String line;
             while ((line = reader.readLine()) != null){
                 simulator.add(line);
+                simulator.addPriorityQueue();
             }
         } catch (IOException e){
             e.printStackTrace();
         }
+
+        if (simulator.isEmpty()){
+            System.out.println("All patients have been seen.");
+        }
+
+        System.out.println(simulator.remove());
     }
 }

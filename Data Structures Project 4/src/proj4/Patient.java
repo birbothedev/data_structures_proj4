@@ -17,20 +17,8 @@ public class Patient implements Comparable<Patient> {
         return triageCode;
     }
 
-    public void setTriageCode(String triageCode) {
-        this.triageCode = triageCode;
-    }
-
-    public int getPriority() {
-        return this.priority;
-    }
-
     public void setPriority(int priority) {
         this.priority = priority;
-    }
-
-    public int getArrivalOrder() {
-        return arrivalOrder;
     }
 
     public void setArrivalOrder(int arrivalOrder) {

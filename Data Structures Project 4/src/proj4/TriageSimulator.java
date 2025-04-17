@@ -6,16 +6,10 @@ import java.util.Queue;
 
 public class TriageSimulator {
     private final PriorityQueue<Patient> priorityQueue = new PriorityQueue<>();
-    private Queue<Patient> firstQueue = new LinkedList<>();
-    private Queue<Patient> secondQueue = new LinkedList<>();
-    private Queue<Patient> thirdQueue =  new LinkedList<>();
+    private final Queue<Patient> firstQueue = new LinkedList<>();
+    private final Queue<Patient> secondQueue = new LinkedList<>();
+    private final Queue<Patient> thirdQueue =  new LinkedList<>();
     private int arrivalOrder;
-
-    public TriageSimulator(Queue<Patient> firstQueue, Queue<Patient> secondQueue, Queue<Patient> thirdQueue) {
-        this.firstQueue = firstQueue;
-        this.secondQueue = secondQueue;
-        this.thirdQueue = thirdQueue;
-    }
 
     public TriageSimulator(){
 
@@ -57,7 +51,7 @@ public class TriageSimulator {
 
     public Boolean isEmpty(){
         // if all queues are empty return true
-        return (firstQueue.isEmpty() && secondQueue.isEmpty() && thirdQueue.isEmpty());
+        return (firstQueue.isEmpty() && secondQueue.isEmpty() && thirdQueue.isEmpty() && priorityQueue.isEmpty());
     }
 
     public void add(String lineFromFile){
@@ -71,7 +65,13 @@ public class TriageSimulator {
     }
 
     public String remove(){
-        return " ";
+        Patient p1 = priorityQueue.poll();
+        if (p1 == null){
+            return "No patients in the queue.";
+        }
+        firstQueue.remove(p1);
+        secondQueue.remove(p1);
+        thirdQueue.remove(p1);
+        return "Next patient to be seen: " + p1;
     }
-
 }
