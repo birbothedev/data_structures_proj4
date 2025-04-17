@@ -13,6 +13,7 @@ public class Main {
             while ((line = reader.readLine()) != null){
                 simulator.add(line);
                 simulator.addPriorityQueue();
+//                System.out.println(simulator.getPriorityQueue());
             }
         } catch (IOException e){
             e.printStackTrace();

@@ -15,6 +15,10 @@ public class TriageSimulator {
 
     }
 
+    public PriorityQueue<Patient> getPriorityQueue() {
+        return priorityQueue;
+    }
+
     public void addRegularQueue(Patient patient){
         if (patient.getTriageCode() == null){
             System.out.println("Please add a triage code for the patient.");
