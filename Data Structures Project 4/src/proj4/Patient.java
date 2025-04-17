@@ -3,7 +3,7 @@ package proj4;
 public class Patient implements Comparable<Patient> {
     private final String firstName;
     private final String lastName;
-    private String triageCode;
+    private final String triageCode;
     private int priority;
     private int arrivalOrder;
 
